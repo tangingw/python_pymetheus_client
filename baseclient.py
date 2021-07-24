@@ -24,9 +24,11 @@ class PyMetheusClient(ABC):
 
             self.headers.update(headers)
 
-        self.config = configuration
+        self.config = json.loads(configuration.load_config())
 
-        self.url = json.loads(self.config.load_config())["config"]["url"]    
+        if self.config["status_code"] == 200:
+        
+            self.url = self.config["config"]["url"]    
 
     @abstractmethod
     def get_data(self, parameters=None, data=None, json=None):
@@ -63,34 +65,3 @@ class PyMetheusClient(ABC):
             params=parameters,
             json=json_data
         )
-
-
-class PyMetheusDevice(PyMetheusClient):
-
-    def __init__(self, configuration):
-
-        self.load_config(configuration)
-    
-    def load_config(self, configuration, headers: dict=None):
-        super().load_config(configuration, headers=headers)
-
-    def get_data(self):
-        return "Get"
-        #return super().get_data(parameters=parameters, data=data, json=json)
-
-    def put_data(self):
-        return "Put"
-        #return super().put_data(data)
-
-    def delete(self):
-        return "Delete"
-        #return super().delete(data=data, json_data=json_data)
-    
-    def post_data(self, data=None):
-        return "Post"
-        #return super().post_data(data)
-
-
-#c = PyMetheusConfig()
-#m = PyMetheusDevice(c)
-#print(m.get_data())
