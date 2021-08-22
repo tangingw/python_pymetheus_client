@@ -45,3 +45,12 @@ def test_monitor_http_failed():
     http_monitor_status = http_monitor.get_status()
 
     assert http_monitor_status["status_code"] == 500
+
+
+def test_monitor_http_response_time():
+
+    http_monitor = MonitorHTTP("http://raspi3.mobieus.org:3333", service_desc="My Gitea server", service_port=3333)
+    http_monitor_response_time = http_monitor.get_response_time()
+
+    assert http_monitor_response_time["status_code"] == 200
+    assert isinstance(http_monitor_response_time["status_msg"], float)

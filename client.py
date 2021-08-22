@@ -11,9 +11,8 @@ class PyMetheusDevice(PyMetheusClient):
     def load_config(self, configuration, headers: dict=None):
         super().load_config(configuration, headers=headers)
 
-    def get_data(self):
-        #return "GET"
-        parameters, data, json = None, None, None
+    def get_data(self, parameters=None, data=None, json=None):
+
         return super().get_data(parameters=parameters, data=data, json=json)
 
     def put_data(self):
@@ -27,4 +26,8 @@ class PyMetheusDevice(PyMetheusClient):
     def post_data(self, data=None):
         #return "POST"
         return super().post_data(data)
+    
+    def select_endpoint(self, endpoint_name):
+
+        self.url = f"{self.url}/{endpoint_name}"
 

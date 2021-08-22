@@ -65,14 +65,23 @@ class MonitorHTTP(MonitorService):
 
     def get_response_time(self, headers=None, params=None):
 
-        service_response = self.get_status(headers=headers, params=params)
+        """service_response = self.get_status(headers=headers, params=params)
 
         if service_response["status_code"] == 200:
 
             response = requests.get(self.http_url, headers=headers, params=params)
+        
             return return_status(200, response.elapsed.total_seconds)
 
         return service_response
+        """
+        response = requests.get(self.http_url, headers=headers, params=params)
+
+        if response.status_code == 200:
+
+            return return_status(200, response.elapsed.total_seconds())
+        
+        return return_status(500, 0)
 
 
 class MonitorDBMS(MonitorService):

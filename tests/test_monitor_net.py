@@ -61,3 +61,45 @@ def test_get_all_info(net_app):
     assert isinstance(network_info, dict)
     assert "network_interfaces" in network_info.keys()
     assert "network_netstats" in network_info.keys()
+
+
+def test_get_network_ping(net_app):
+
+    network_ping = net_app.get_ping()
+
+    assert isinstance(network_ping, dict)
+    assert "status" in network_ping.keys()
+    assert "message" in network_ping.keys()
+
+    assert network_ping["status"] in [200, 500]
+
+
+def test_get_network_ping_target_ip(net_app):
+
+    for target_ip in ["1.1.1.1", "192.168.200.1", "9.9.9.9"]:
+
+        network_ping = net_app.get_ping(target_ip)
+
+        assert isinstance(network_ping, dict)
+        assert "status" in network_ping.keys()
+        assert "message" in network_ping.keys()
+
+        assert network_ping["status"] in [200, 500]
+
+def test_get_network_io_counter(net_app):
+
+    io_counter = net_app.get_net_io_counters()
+
+    for _, interface_io in io_counter.items():
+
+        assert isinstance(interface_io, dict)
+        assert len(
+            set(
+                interface_io.keys()).intersection(
+                    [
+                        'bytes_sent', 'bytes_recv', 
+                        'packets_sent', 'packers_recv', 
+                        'errin', 'errout', 'dropin', 'dropout'
+                    ]
+                )
+        ) == len(interface_io.keys())

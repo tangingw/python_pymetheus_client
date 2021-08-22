@@ -12,6 +12,10 @@ class MonitorCPU:
 
         return self.__dict__
 
+    def get_cpu_percent(self):
+
+        return sum(self.cpu_percent_per_cpu)/len(self.cpu_percent_per_cpu)
+
 
 class MonitorMemory:
 

@@ -29,6 +29,11 @@ def test_get_cpu_data(get_cpu):
     assert "cpu_percent_per_cpu" in get_cpu.get_cpu_data().keys()
 
 
+def test_get_cpu_percent(get_cpu):
+
+    assert isinstance(get_cpu.get_cpu_percent(), float)
+
+
 def test_get_memory(get_memory):
 
     assert isinstance(get_memory.get_memory_data(), dict)

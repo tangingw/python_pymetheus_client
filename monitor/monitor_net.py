@@ -75,5 +75,49 @@ class MonitorNetwork:
 
         return {
             "network_interfaces": self.get_network_interface(),
-            "network_netstats": self.get_connection_process()
+            "network_netstats": self.get_connection_process(),
+            "network_io": self.get_net_io_counters()
+        }
+
+    def get_ping(self, target_ip=None):
+
+        if not target_ip:
+
+            target_ip = "8.8.8.8"
+
+        if platform.system() == "Windows":
+            ping_result = os.system(f"ping -n 3 {target_ip}")
+
+        else:
+            ping_result = os.system(f"ping -c 3 {target_ip}")
+        
+
+        if ping_result > 0:
+
+            return {
+                "status": 500,
+                "message": "ping failed"
+            }
+        
+        return {
+            "status": 200,
+            "message": "ping_success"
+        }
+    
+    def get_net_io_counters(self):
+
+        io_counters = psutil.net_io_counters(pernic=True)
+        
+        return {
+            interface: {
+                "bytes_sent": interface_io.bytes_sent,
+                "bytes_recv": interface_io.bytes_recv,
+                "packets_sent": interface_io.packets_sent,
+                "packers_recv": interface_io.packets_recv,
+                "errin": interface_io.errin,
+                "errout": interface_io.errout,
+                "dropin": interface_io.dropin,
+                "dropout": interface_io.dropout
+            }
+            for interface, interface_io in io_counters.items()
         }
