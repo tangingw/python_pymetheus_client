@@ -7,7 +7,7 @@ class MonitorEvent:
 
     @staticmethod
     def generate_event(
-        event_type, monitor_object, device_status, event_value, 
+        event_type, monitor_object, monitor_type_name, event_value, 
         event_message=None, event_status=None
     ):
 
@@ -16,6 +16,6 @@ class MonitorEvent:
             "event_value": event_value, #single-value event
             "event_message": event_message, #can be a log message
             "monitor_type": get_monitor_type(monitor_object), #To which this service go e.g. service
-            "monitor_type_id": device_status[get_monitor_type(monitor_object)], #service id
+            "monitor_type_name": monitor_type_name,
             "created_at": datetime.utcnow().isoformat()
         }
