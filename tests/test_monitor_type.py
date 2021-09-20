@@ -3,7 +3,7 @@ from monitor.monitor_sys import MonitorDisk, MonitorCPU
 from monitor_type import get_monitor_type
 
 
-def test_get_monitor_type():
+def test_get_monitor_type(): #need to rewrite again
 
     assert get_monitor_type(MonitorDisk()) == "harddisk"
     assert get_monitor_type(MonitorCPU()) == "cpu"

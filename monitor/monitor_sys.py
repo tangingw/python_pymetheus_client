@@ -16,6 +16,14 @@ class MonitorCPU:
 
         return sum(self.cpu_percent_per_cpu)/len(self.cpu_percent_per_cpu)
 
+    def get_class_name(self):
+
+        if self.__class__.__base__.__name__ != "object":
+
+            return self.__class__.__name__
+        
+        return self.__class__.__base__.__name__
+
 
 class MonitorMemory:
 
@@ -32,6 +40,14 @@ class MonitorMemory:
     def get_memory_data(self):
 
         return self.virtual_memory_dict
+    
+    def get_class_name(self):
+
+        if self.__class__.__base__.__name__ != "object":
+
+            return self.__class__.__name__
+        
+        return self.__class__.__base__.__name__
 
 
 class MonitorDisk:
@@ -90,3 +106,11 @@ class MonitorDisk:
             } 
             for partition in self.get_all_partition()
         }
+
+    def get_class_name(self):
+
+        if self.__class__.__base__.__name__ != "object":
+
+            return self.__class__.__name__
+        
+        return self.__class__.__base__.__name__

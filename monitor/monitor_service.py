@@ -39,6 +39,14 @@ class MonitorService:
         """
         pass
 
+    def get_class_name(self):
+
+        if self.__class__.__base__.__name__ != "object":
+
+            return self.__class__.__name__
+        
+        return self.__class__.__base__.__name__
+
 
 class MonitorHTTP(MonitorService):
 

@@ -15,7 +15,7 @@ def test_cpu_event():
     assert isinstance(event_object["event_value"], float)
 
 
-def test_memory_event():
+def test_memory_event(): #Need to rewrite the tests
 
     my_memory = MonitorMemory()
     event_object = MonitorEvent.generate_event(

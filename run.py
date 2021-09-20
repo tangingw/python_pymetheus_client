@@ -1,35 +1,47 @@
-from monitor.monitor_net import MonitorNetwork
-from monitor.monitor_platform import MonitorPlatform
-from monitor.monitor_sys import MonitorCPU
+from register import RegisterDeviceHandler
 from monitor.monitor_sys import MonitorMemory
-from monitor.monitor_sys import MonitorDisk
+from client import PyMetheusDevice
+from event import MonitorEvent
 
-my_platform = MonitorPlatform()
-my_cpu = MonitorCPU()
-my_memory = MonitorMemory()
-my_disk = MonitorDisk()
-my_network = MonitorNetwork()
- 
-print(type(my_platform).__name__)
-print(
-    my_platform.get_platform_info()
-)
 
-print(
-    my_cpu.get_cpu_data()
-)
+register_device = RegisterDeviceHandler()
+device_id = register_device.get_device_id()
 
-print(
-    my_memory.get_memory_data()
-)
+pymetheus_client = PyMetheusDevice()
+pymetheus_client.select_endpoint("/device")
 
-print(
-    my_disk.get_disk_all_data()
-)
+pymetheus_client.select_endpoint(f"/device/{device_id}")
+device_status = pymetheus_client.get_data(device_id)
+"""device_status should contain
+{
+    "device_name": {
+        "device_id":
+        "port_id":
+        "service_id":
+        "network_id":
+    }
+}
 
-print(
-    my_network.get_network_interface()
-)
-print(
-    my_network.get_net_io_counters()
-)
+"""
+if not device_status:
+    print(
+        "Device Not Registered"
+    )
+
+    pymetheus_client.select_endpoint("/device")
+    pymetheus_client.post_data(
+        data=register_device.get_device()
+    )
+
+else:
+
+    #if monitor type is not in monitor_type table, add into table
+    pymetheus_client.select_endpoint("/collect")
+    pymetheus_client.post_data(
+        data=MonitorEvent.generate_event(
+            "Memory", MonitorMemory, 
+            device_status, event_value=4
+        )
+    )
+
+    print("Send Event Data")

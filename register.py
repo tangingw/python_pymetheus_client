@@ -2,6 +2,7 @@ from datetime import datetime
 from monitor.monitor_platform import MonitorPlatform
 from monitor.monitor_sys import MonitorMemory
 from monitor.monitor_sys import MonitorDisk
+from monitor.monitor_net import MonitorNetwork
 
 
 class RegisterDeviceHandler:
@@ -9,20 +10,28 @@ class RegisterDeviceHandler:
     def __init__(self):
         self._device_info = MonitorPlatform().get_platform_info()
         self._device_memory = MonitorMemory().get_memory_data()
-
-    def register(self):
-
-        return {
+        self._device_hdd = MonitorDisk().get_disk_all_data()
+        self._device_network = MonitorNetwork().get_network_interface()
+        self._device_default_meta = {
             "host_name": self._device_info["machine_name"],
             "cpu": self._device_info["architecture"],
             "os_install": self._device_info["system"],
             "memory": self._device_memory["total"],
-            "harddisc_size": None,
+            "harddisc": self._device_hdd,
+            "network": self._device_network,
             "created_at": datetime.utcnow().isoformat(),
             "updated_at": datetime.utcnow().isoformat()
         }
 
-    def verify_id(self):
+    def add_service(self, service_dict):
+
+        self._device_default_meta.update(service_dict)
+    
+    def get_device(self):
+
+        return self._device_default_meta
+
+    def get_device_id(self):
 
         return {
             "host_name": self._device_info["machine_name"]

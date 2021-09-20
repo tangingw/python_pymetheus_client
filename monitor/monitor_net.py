@@ -121,3 +121,11 @@ class MonitorNetwork:
             }
             for interface, interface_io in io_counters.items()
         }
+    
+    def get_class_name(self):
+
+        if self.__class__.__base__.__name__ != "object":
+
+            return self.__class__.__name__
+        
+        return self.__class__.__base__.__name__
