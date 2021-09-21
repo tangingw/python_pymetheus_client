@@ -4,7 +4,7 @@ from monitor.monitor_net import MonitorNetwork
 
 device_handler = RegisterDeviceHandler()
 print(
-    device_handler.get_device()
+    device_handler.get_device_metadata()
 )
 
 """

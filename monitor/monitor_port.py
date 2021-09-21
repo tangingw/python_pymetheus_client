@@ -4,14 +4,16 @@ from utils import return_status
 
 class MonitorPort:
 
-    def __init__(self, port, port_description):
+    def __init__(self, ip_address, port, port_description):
 
+        self.ip_address = ip_address
         self.port = port
         self.port_description = port_description
     
     def get_port_data(self):
 
         return {
+            "ip_address": self.ip_address,
             "port": self.port,
             "port_desc": self.port_description
         }
