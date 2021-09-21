@@ -60,7 +60,7 @@ class MonitorDisk:
 
         return [
             {
-                "device": disk.device, "mount_point": disk.mountpoint,
+                "name": disk.device, "mount_point": disk.mountpoint,
                 "fstype": disk.fstype, "opts": disk.opts
             } 
             for disk in self.all_disk_partition
@@ -92,6 +92,15 @@ class MonitorDisk:
         return [
             self.get_disk_usage(partition["mount_point"])
             for partition in self.get_all_partition()
+        ]
+
+    def get_disk_metadata(self):
+        disk_metadata_list = []
+        disk_all_data = self.get_disk_all_data()
+
+        return [
+            dict(**disk_all_data[key]["partition"], size=disk_all_data[key]["usage"]["total"])
+            for key in disk_all_data.keys()
         ]
 
     def get_disk_all_data(self):
