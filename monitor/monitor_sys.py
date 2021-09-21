@@ -96,7 +96,6 @@ class MonitorDisk:
 
     def get_disk_all_data(self):
 
-        print(self.get_all_partition())
         return {
             partition["mount_point"]: {
                 "partition": partition,

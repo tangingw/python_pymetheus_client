@@ -3,6 +3,8 @@ from monitor.monitor_platform import MonitorPlatform
 from monitor.monitor_sys import MonitorMemory
 from monitor.monitor_sys import MonitorDisk
 from monitor.monitor_net import MonitorNetwork
+from monitor.monitor_port import MonitorPort
+from monitor.monitor_service import MonitorDBMS
 
 
 class RegisterDeviceHandler:
@@ -12,6 +14,7 @@ class RegisterDeviceHandler:
         self._device_memory = MonitorMemory().get_memory_data()
         self._device_hdd = MonitorDisk().get_disk_all_data()
         self._device_network = MonitorNetwork().get_network_interface()
+
         self._device_default_meta = {
             "host_name": self._device_info["machine_name"],
             "cpu": self._device_info["architecture"],
@@ -19,6 +22,15 @@ class RegisterDeviceHandler:
             "memory": self._device_memory["total"],
             "harddisc": self._device_hdd,
             "network": self._device_network,
+            "port": [
+                MonitorPort(5432, "PostgreSQL").get_port_data(),
+ 
+            ],
+            "service": [
+                MonitorDBMS(
+                    "", 5432, service_desc="PostgreSQL"
+                ).get_service_metadata()
+            ],
             "created_at": datetime.utcnow().isoformat(),
             "updated_at": datetime.utcnow().isoformat()
         }

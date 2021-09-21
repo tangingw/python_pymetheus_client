@@ -13,11 +13,12 @@ def return_status(status_code, status_msg):
 
 class MonitorService:
 
-    def __init__(self, service_port, service_proto, service_desc=None):
+    def __init__(self, service_port, service_proto, service_url=None, service_desc=None):
 
         self.service_desc = service_desc
         self.service_port = service_port
         self.service_proto = service_proto
+        self.service_url = service_url
     
     def get_service_metadata(self):
 
@@ -52,13 +53,13 @@ class MonitorHTTP(MonitorService):
 
     def __init__(self, http_url, service_desc=None, service_port=80):
 
-        self.http_url = http_url
+        self.service_url = http_url
         super().__init__(service_port, "http", service_desc)
 
     def get_status(self, headers=None, params=None):
 
         try:
-            service_response = requests.get(self.http_url, headers=headers, params=params)
+            service_response = requests.get(self.service_url, headers=headers, params=params)
         
         except requests.exceptions.ConnectionError as error_msg:
 
@@ -94,15 +95,16 @@ class MonitorHTTP(MonitorService):
 
 class MonitorDBMS(MonitorService):
 
-    def __init__(self, dbms_metadata, service_port, dbms_module_name="psycopg2", service_desc=None):
+    def __init__(self, dbms_metadata, service_port, dbms_module_name="psycopg2", service_url=None, service_desc=None):
 
-        self.dbms_module = importlib(dbms_module_name)
-        self.dbms_connection = self.dbms_module.connect(
-            host=dbms_metadata["server"], database=dbms_metadata["database"],
-            user=dbms_metadata["user"], password=dbms_metadata["password"]
-        )
+        self.dbms_module = importlib.import_module(dbms_module_name)
+        if dbms_metadata:
+            self.dbms_connection = self.dbms_module.connect(
+                host=dbms_metadata["server"], database=dbms_metadata["database"],
+                user=dbms_metadata["user"], password=dbms_metadata["password"]
+            )
 
-        super().__init__(service_port, "tcp", service_desc)
+        super().__init__(service_port, "tcp", service_url=service_url, service_desc=service_desc)
     
     def get_status(self):
 
