@@ -124,7 +124,7 @@ class MonitorNetwork:
     
     def get_class_name(self):
 
-        if self.__class__.__base__.__name__ != "object":
+        if self.__class__.__base__.__name__ == "object":
 
             return self.__class__.__name__
         

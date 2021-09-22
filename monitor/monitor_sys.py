@@ -5,8 +5,21 @@ class MonitorCPU:
     
     def __init__(self):
 
+        self.cpu_cores = psutil.cpu_count(logical=False)
+        self.cpu_frequency_per_cpu = [
+            {
+                "current": p.current,
+                "min": p.min,
+                "max": p.max
+            }   for p in psutil.cpu_freq(percpu=True) 
+        ]   
+        self.cpu_frequency = {
+            "current": psutil.cpu_freq(percpu=False).current, 
+            "min": psutil.cpu_freq(percpu=False).min, 
+            "max": psutil.cpu_freq(percpu=False).max
+        }
         self.cpu_percent_overall = psutil.cpu_percent(interval=1)
-        self.cpu_percent_per_cpu = psutil.cpu_percent(interval=1, percpu=True)
+        self.cpu_percent_per_cpu = psutil.cpu_percent(interval=None, percpu=True)
 
     def get_cpu_data(self):
 
@@ -18,7 +31,7 @@ class MonitorCPU:
 
     def get_class_name(self):
 
-        if self.__class__.__base__.__name__ != "object":
+        if self.__class__.__base__.__name__ == "object":
 
             return self.__class__.__name__
         
@@ -43,7 +56,7 @@ class MonitorMemory:
     
     def get_class_name(self):
 
-        if self.__class__.__base__.__name__ != "object":
+        if self.__class__.__base__.__name__ == "object":
 
             return self.__class__.__name__
         
@@ -117,7 +130,7 @@ class MonitorDisk:
 
     def get_class_name(self):
 
-        if self.__class__.__base__.__name__ != "object":
+        if self.__class__.__base__.__name__ == "object":
 
             return self.__class__.__name__
         

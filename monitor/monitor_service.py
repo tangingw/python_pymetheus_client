@@ -89,13 +89,24 @@ class MonitorHTTP(MonitorService):
         
         return return_status(500, 0)
 
+    def get_class_name(self):
+
+        if self.__class__.__base__.__name__ == "object":
+
+            return self.__class__.__name__
+        
+        return self.__class__.__base__.__name__
+
 
 class MonitorDBMS(MonitorService):
 
-    def __init__(self, service_port, dbms_module_name="psycopg2", service_url=None, service_desc=None):
+    def __init__(self, service_port, dbms_module_name="psycopg2", service_url=None, service_desc=None, service_name=None):
 
         self.dbms_module = importlib.import_module(dbms_module_name)
-        super().__init__(service_port, "database", service_url=service_url, service_desc=service_desc)
+        super().__init__(
+            service_port, "database", service_url=service_url, service_desc=service_desc,
+            service_name=service_name
+        )
 
     def connect_db(self, dbms_metadata):
         self.dbms_connection = self.dbms_module.connect(
@@ -128,6 +139,14 @@ class MonitorDBMS(MonitorService):
 
             return return_status(502, error_msg)
 
+    def get_class_name(self):
+
+        if self.__class__.__base__.__name__ == "object":
+
+            return self.__class__.__name__
+        
+        return self.__class__.__base__.__name__
+
 
 class MonitorPort(MonitorService):
 
@@ -156,3 +175,11 @@ class MonitorPort(MonitorService):
 
         else:
             return return_status(200, "success")
+
+    def get_class_name(self):
+
+        if self.__class__.__base__.__name__ == "object":
+
+            return self.__class__.__name__
+        
+        return self.__class__.__base__.__name__

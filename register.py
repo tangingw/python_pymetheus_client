@@ -7,6 +7,7 @@ from monitor.monitor_port import MonitorPort
 from monitor.monitor_service import MonitorDBMS
 from configuration import PyMetheusConfig
 
+
 class RegisterDeviceHandler:
 
     def __init__(self):
