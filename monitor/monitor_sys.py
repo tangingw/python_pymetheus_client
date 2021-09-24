@@ -108,7 +108,6 @@ class MonitorDisk:
         ]
 
     def get_disk_metadata(self):
-        disk_metadata_list = []
         disk_all_data = self.get_disk_all_data()
 
         return [

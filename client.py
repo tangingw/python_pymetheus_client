@@ -2,14 +2,22 @@ from configuration import PyMetheusConfig
 from baseclient import PyMetheusClient
 
 
-class PyMetheusDevice(PyMetheusClient):
+class PyMetheusDeviceClient(PyMetheusClient):
 
     def __init__(self):
 
-        self.load_config(PyMetheusConfig())
+        self.load_config()
     
-    def load_config(self, configuration, headers: dict=None):
-        super().load_config(configuration, headers=headers)
+    def load_config(self, headers: dict=None):
+        super().load_config(PyMetheusConfig(), headers=headers)
+
+    def get_config(self):
+
+        return self.config
+
+    def write_config(self, config_data, filepath: str = None) -> dict:
+        
+        return super().write_config(PyMetheusConfig(), config_data, filepath=filepath)
 
     def get_data(self, parameters=None, data=None, json=None):
 

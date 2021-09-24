@@ -5,7 +5,7 @@ from monitor.monitor_sys import MonitorCPU
 from event import MonitorEvent
 from monitor.monitor_platform import MonitorPlatform
 from monitor.monitor_service import MonitorDBMS
-from client import PyMetheusDevice
+
 
 """monitor_dbms = MonitorDBMS("5432", service_desc="PostgreSQL", service_name="PostgreSQL DB")
 print(
@@ -16,31 +16,27 @@ monitor_dbms.connect_db(
     {
         "database": "postgres",
         "user": "postgres",
-        "password": "tallgeese3",
+        "password": "",
         "server": "192.168.0.179"
     }
 )
 """
 
-pymetheus_client = PyMetheusDevice()
-pymetheus_client.select_endpoint("/collect")
 
 print(
     MonitorCPU().get_cpu_data()
 )
 monitor_cpu = MonitorCPU()
+monitor_event = MonitorEvent()
 
 while True:
-
-    my_event = MonitorEvent.generate_event(
+        
+    print(monitor_cpu.get_cpu_percent())
+    monitor_event.post_event(
         "cpu", monitor_cpu,
         MonitorPlatform().get_platform_info()["machine_name"],
         event_value=monitor_cpu.get_cpu_percent()
     )
-
-    print(my_event)
-        
-    pymetheus_client.post_data(my_event)
 
     """dbms_return_status = monitor_dbms.get_status()
 

@@ -1,9 +1,8 @@
+import hashlib
+import json
 from register import RegisterDeviceHandler
-from monitor.monitor_sys import MonitorMemory
 from monitor.monitor_service import MonitorDBMS
 from monitor.monitor_port import MonitorPort
-from client import PyMetheusDevice
-
 from event import MonitorEvent
 
 
@@ -25,9 +24,6 @@ register_device.add_port(
         ).get_port_data()
     ]
 )
-
-pymetheus_client = PyMetheusDevice()
-pymetheus_client.select_endpoint("/register")
 
 """
 pymetheus_client.select_endpoint(f"/device/{device_id}")
@@ -56,10 +52,5 @@ else:
 
     print("Send Event Data")
 """
-print(
-    register_device.get_device_metadata()
-)
-#pymetheus_client.select_endpoint("/device")
-pymetheus_client.post_data(
-    data=register_device.get_device_metadata()
-)
+
+register_device.register()

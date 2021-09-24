@@ -1,13 +1,17 @@
 from datetime import datetime
-from os import stat
 from monitor_type import MonitorType
-
+from client import PyMetheusDeviceClient
 
 class MonitorEvent:
+    
+    def __init__(self):
 
-    @staticmethod
+        self.client = PyMetheusDeviceClient()
+        self.client.select_endpoint("/collect")
+
     def generate_event(
-        event_type, monitor_object, monitor_type_name, event_value=None, 
+        self, event_type, 
+        monitor_object, monitor_type_name, event_value=None, 
         event_message=None, event_status=None
     ):
 
@@ -20,3 +24,19 @@ class MonitorEvent:
             "monitor_type_name": monitor_type_name,
             "created_at": datetime.utcnow().isoformat()
         }
+    
+    def post_event(
+        self, event_type, 
+        monitor_object, monitor_type_name, event_value=None, 
+        event_message=None, event_status=None
+    ):
+
+        my_event = self.generate_event(
+            event_type, 
+            monitor_object, monitor_type_name, event_value=event_value, 
+            event_message=event_message, event_status=event_status
+        )
+
+        self.client.post_data(my_event)
+
+

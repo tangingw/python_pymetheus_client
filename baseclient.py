@@ -4,17 +4,23 @@ import json
 from utils import get_response
 from abc import abstractmethod, ABC
 from monitor.monitor_sys import MonitorCPU
-from configuration import PyMetheusConfig
 
 
 class PyMetheusClient(ABC):
     
     config = None
     headers = None
+    main_url = None
     url = None
+    register_hash = None
 
     @abstractmethod
-    def load_config(self, configuration, headers:dict = None):
+    def write_config(self, configuration, config_data, filepath: str = None) -> dict:
+
+        return configuration.write_config(config_data, filepath=filepath)
+    
+    @abstractmethod
+    def load_config(self, configuration, headers:dict = None, filepath: str = None):
 
         self.headers = {
             "Content-Type": "application/json"
@@ -24,11 +30,13 @@ class PyMetheusClient(ABC):
 
             self.headers.update(headers)
 
-        self.config = json.loads(configuration.load_config())
+        self.config = json.loads(configuration.load_config(filepath=filepath))
 
         if self.config["status_code"] == 200:
         
-            self.url = self.config["config"]["url"]    
+            self.main_url = self.config["config"]["url"]
+            self.url = self.config["config"]["url"]
+            self.register_hash = self.config["config"].get("register_hash")
 
     @abstractmethod
     def get_data(self, parameters=None, data=None, json=None):
