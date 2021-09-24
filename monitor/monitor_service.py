@@ -113,32 +113,63 @@ class MonitorDBMS(MonitorService):
             host=dbms_metadata["server"], database=dbms_metadata["database"],
             user=dbms_metadata["user"], password=dbms_metadata["password"]
         )
-    
+
+    def get_activity(decorated_function):
+
+        def my_inner_action(self, *args, **kwargs):
+
+            try:
+                
+                return decorated_function(self, *args, **kwargs)
+
+            except self.dbms_module.InterfaceError as error_msg:
+
+                return return_status(501, error_msg)
+            
+            except self.dbms_module.OperationalError as error_msg:
+
+                return return_status(502, error_msg)
+
+        return my_inner_action
+
+    @get_activity
     def get_status(self):
 
-        try:
-            with self.dbms_connection.cursor() as cursor:
+        with self.dbms_connection.cursor() as cursor:
 
-                cursor.execute(
-                    "SELECT 1 + 1"
-                )
+            cursor.execute(
+                "SELECT 1 + 1"
+            )
+            
+            result = cursor.fetchone()
+
+            if result:
+
+                return return_status(200, "Success")
                 
-                result = cursor.fetchone()
+            return return_status(404, "Failed")
+    
+    @get_activity
+    def get_connection_count(self):
 
-                if result:
+        with self.dbms_connection.cursor() as cursor:
 
-                    return return_status(200, "Database is Alive")
-                    
-                return return_status(404, "result not found")
-                
-        except self.dbms_module.InterfaceError as error_msg:
+            cursor.execute(
+                """
+                select 
+                    count(datid) as conn_count 
+                from pg_stat_activity
+                where state = 'active'
+                """
+            )
+            
+            header = [x[0] for x in cursor.description]
+            result = cursor.fetchone()
 
-            return return_status(501, error_msg)
-        
-        except self.dbms_module.OperationalError as error_msg:
-
-            return return_status(502, error_msg)
-
+            return {
+                header[i]: r for i, r in enumerate(result) 
+            } if result else None
+    
     def get_class_name(self):
 
         if self.__class__.__base__.__name__ == "object":
@@ -176,6 +207,7 @@ class MonitorPort(MonitorService):
         else:
             return return_status(200, "success")
 
+    
     def get_class_name(self):
 
         if self.__class__.__base__.__name__ == "object":
