@@ -48,7 +48,7 @@ class RegisterDeviceHandler:
                 ).get_service_metadata()
             ]
         """
-        self._device_default_meta["port"] = port_list    
+        self._device_default_meta["ports"] = port_list    
 
     def get_device_metadata(self):
 

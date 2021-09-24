@@ -105,7 +105,7 @@ class MonitorDBMS(MonitorService):
         self.dbms_module = importlib.import_module(dbms_module_name)
         super().__init__(
             service_port, "database", service_url=service_url, service_desc=service_desc,
-            service_name=service_name
+            service_name=service_name,
         )
 
     def connect_db(self, dbms_metadata):
