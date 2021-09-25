@@ -1,0 +1,277 @@
+{
+    "host_name": "DESKTOP-DR3AEJT",
+    "cpu": "AMD64",
+    "os_install": "Windows",
+    "memory": 16862167040,
+    "harddisc": [
+        {
+            "name": "C:\\",
+            "mount_point": "C:\\",
+            "fstype": "NTFS",
+            "opts": "rw,fixed",
+            "size": 355304792064
+        },
+        {
+            "name": "D:\\",
+            "mount_point": "D:\\",
+            "fstype": "NTFS",
+            "opts": "rw,fixed",
+            "size": 644244041728
+        },
+        {
+            "name": "E:\\",
+            "mount_point": "E:\\",
+            "fstype": "FAT32",
+            "opts": "rw,fixed",
+            "size": 8000372736
+        },
+        {
+            "name": "G:\\",
+            "mount_point": "G:\\",
+            "fstype": "",
+            "opts": "cdrom",
+            "size": null
+        }
+    ],
+    "network": {
+        "VPN - VPN Client": [
+            {
+                "ip_type": "mac-address",
+                "mac_address": "5E-EC-F4-13-F9-8F",
+                "ip_address": null,
+                "netmask": null,
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv4",
+                "mac_address": null,
+                "ip_address": "169.254.127.26",
+                "netmask": "255.255.0.0",
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv6",
+                "mac_address": null,
+                "ip_address": "fe80::491:10db:fefa:7f1a",
+                "netmask": null,
+                "broadcast": null
+            }
+        ],
+        "VirtualBox Host-Only Network": [
+            {
+                "ip_type": "mac-address",
+                "mac_address": "0A-00-27-00-00-06",
+                "ip_address": null,
+                "netmask": null,
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv4",
+                "mac_address": null,
+                "ip_address": "192.168.56.1",
+                "netmask": "255.255.255.0",
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv6",
+                "mac_address": null,
+                "ip_address": "fe80::91bb:ad96:6fe4:5386",
+                "netmask": null,
+                "broadcast": null
+            }
+        ],
+        "Ethernet": [
+            {
+                "ip_type": "mac-address",
+                "mac_address": "08-62-66-B3-A4-01",
+                "ip_address": null,
+                "netmask": null,
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv4",
+                "mac_address": null,
+                "ip_address": "192.168.200.190",
+                "netmask": "255.255.255.0",
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv6",
+                "mac_address": null,
+                "ip_address": "fe80::8968:82fd:c60c:dd56",
+                "netmask": null,
+                "broadcast": null
+            }
+        ],
+        "Wi-Fi": [
+            {
+                "ip_type": "mac-address",
+                "mac_address": "40-E2-30-70-64-5B",
+                "ip_address": null,
+                "netmask": null,
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv4",
+                "mac_address": null,
+                "ip_address": "169.254.13.18",
+                "netmask": "255.255.0.0",
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv6",
+                "mac_address": null,
+                "ip_address": "fe80::6d6b:7b18:1bd4:d12",
+                "netmask": null,
+                "broadcast": null
+            }
+        ],
+        "Local Area Connection* 9": [
+            {
+                "ip_type": "mac-address",
+                "mac_address": "12-E2-30-70-64-5B",
+                "ip_address": null,
+                "netmask": null,
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv4",
+                "mac_address": null,
+                "ip_address": "169.254.48.75",
+                "netmask": "255.255.0.0",
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv6",
+                "mac_address": null,
+                "ip_address": "fe80::3d37:b1c3:42b3:304b",
+                "netmask": null,
+                "broadcast": null
+            }
+        ],
+        "Local Area Connection* 10": [
+            {
+                "ip_type": "mac-address",
+                "mac_address": "22-E2-30-70-64-5B",
+                "ip_address": null,
+                "netmask": null,
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv4",
+                "mac_address": null,
+                "ip_address": "169.254.80.43",
+                "netmask": "255.255.0.0",
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv6",
+                "mac_address": null,
+                "ip_address": "fe80::b1ab:da21:ad7a:502b",
+                "netmask": null,
+                "broadcast": null
+            }
+        ],
+        "VMware Network Adapter VMnet1": [
+            {
+                "ip_type": "mac-address",
+                "mac_address": "00-50-56-C0-00-01",
+                "ip_address": null,
+                "netmask": null,
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv4",
+                "mac_address": null,
+                "ip_address": "192.168.134.1",
+                "netmask": "255.255.255.0",
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv6",
+                "mac_address": null,
+                "ip_address": "fe80::e016:5a44:cfa0:df1b",
+                "netmask": null,
+                "broadcast": null
+            }
+        ],
+        "VMware Network Adapter VMnet8": [
+            {
+                "ip_type": "mac-address",
+                "mac_address": "00-50-56-C0-00-08",
+                "ip_address": null,
+                "netmask": null,
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv4",
+                "mac_address": null,
+                "ip_address": "192.168.126.1",
+                "netmask": "255.255.255.0",
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv6",
+                "mac_address": null,
+                "ip_address": "fe80::98a8:b361:de98:d0ac",
+                "netmask": null,
+                "broadcast": null
+            }
+        ],
+        "Bluetooth Network Connection": [
+            {
+                "ip_type": "mac-address",
+                "mac_address": "40-E2-30-70-64-5A",
+                "ip_address": null,
+                "netmask": null,
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv4",
+                "mac_address": null,
+                "ip_address": "169.254.201.22",
+                "netmask": "255.255.0.0",
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv6",
+                "mac_address": null,
+                "ip_address": "fe80::5408:73b3:e4f4:c916",
+                "netmask": null,
+                "broadcast": null
+            }
+        ],
+        "Loopback Pseudo-Interface 1": [
+            {
+                "ip_type": "ipv4",
+                "mac_address": null,
+                "ip_address": "127.0.0.1",
+                "netmask": "255.0.0.0",
+                "broadcast": null
+            },
+            {
+                "ip_type": "ipv6",
+                "mac_address": null,
+                "ip_address": "::1",
+                "netmask": null,
+                "broadcast": null
+            }
+        ]
+    },
+    "ports": [
+        {
+            "ip_address": "192.168.200.190",
+            "port": 5432,
+            "port_desc": "PostgreSQL DB"
+        }
+    ],
+    "services": [
+        {
+            "service_desc": "PostgreSQL",
+            "service_port": 5432,
+            "service_name": "PostgreSQL DB",
+            "service_type": "database",
+            "service_url": null
+        }
+    ]
+}

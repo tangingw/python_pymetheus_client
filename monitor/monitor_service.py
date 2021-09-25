@@ -48,10 +48,11 @@ class MonitorService:
 
 class MonitorHTTP(MonitorService):
 
-    def __init__(self, http_url, service_desc=None, service_port=80):
+    def __init__(self, http_url, service_desc=None, service_port=80, service_name=None):
 
-        self.service_url = http_url
-        super().__init__(service_port, "http", service_desc)
+        super().__init__(service_port, "http", 
+            service_desc=service_desc, service_name=service_name, service_url=http_url
+        )
 
     def get_status(self, headers=None, params=None):
 
@@ -81,7 +82,7 @@ class MonitorHTTP(MonitorService):
 
         return service_response
         """
-        response = requests.get(self.http_url, headers=headers, params=params)
+        response = requests.get(self.service_url, headers=headers, params=params)
 
         if response.status_code == 200:
 

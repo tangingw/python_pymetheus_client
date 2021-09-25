@@ -1,12 +1,12 @@
 import pytest
-from client import PyMetheusDevice
+from client import PyMetheusDeviceClient
 from tests.mock_server import start_mock_server
 
 
 @pytest.fixture
 def load_device_client():
     start_mock_server()
-    return PyMetheusDevice()
+    return PyMetheusDeviceClient()
 
 
 def test_load_config(load_device_client):

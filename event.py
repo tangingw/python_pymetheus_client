@@ -15,6 +15,20 @@ class MonitorEvent:
         event_message=None, event_status=None
     ):
 
+        """
+        monitor_type_name
+        
+        for monitor_type_name reference,
+        "MonitorCPU": "device hostnamme",
+        "MonitorMemory": "device hostname",
+        "MonitorDisk": "hdd name e.g. C:\\ for windows /dev/sda1 for mount point",
+        "MonitorHTTP": "service name",
+        "MonitorDBMS": "service name",
+        "MonitorPort": "port num",
+        "MonitorPlatform": "device hostname",
+        "MonitorNetwork": "ip address",
+        "MonitorService": "service name"
+        """
         return {
             "event_type": event_type, #Can be http response time
             "event_value": event_value, #single-value event

@@ -32,6 +32,7 @@ class MonitorNetwork:
         
         return network_interface_dict
 
+
     def get_connection_process(self):
 
         protocol_dict = {
