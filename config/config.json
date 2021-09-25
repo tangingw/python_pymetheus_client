@@ -1,3 +1,4 @@
 {
-    "url": "http://127.0.0.1:8080"
+    "url": "http://127.0.0.1:5000",
+    "register_hash": "dfa5b8d427190085ee9dd5c2bc7535299be85dadc75cc22e0ef8682739e9b930"
 }
