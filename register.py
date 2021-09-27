@@ -21,12 +21,13 @@ class RegisterDeviceHandler:
         else:
             self.register_config = "config/register.json"
 
+        self.device_hostname = MonitorPlatform().get_platform_data()
         self.client = PyMetheusDeviceClient()    
         self.load_register()
 
     def generate_device_meta(self):
 
-        device_info = MonitorPlatform().get_platform_data()
+        device_info = self.device_hostname
         device_memory = MonitorMemory().get_memory_data()
         device_hdd = MonitorDisk().get_disk_metadata()
         device_network = MonitorNetwork().get_network_interface()
@@ -63,7 +64,6 @@ class RegisterDeviceHandler:
         ]
         """
         for port_item in port_list:
-
             if not (port_item in self._device_default_meta["ports"]):
                 self._device_default_meta["ports"].append(port_item)    
 
@@ -128,8 +128,12 @@ class RegisterDeviceHandler:
                 device_register_str = register_json.read()
 
         if device_register_str:
+
             self._device_default_meta = json.loads(device_register_str)
-        
+
+            if self._device_default_meta["host_name"] != self.device_hostname:
+                self.generate_device_meta()
+
         else:
             self.generate_device_meta()
 

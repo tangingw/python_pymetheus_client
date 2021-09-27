@@ -1,4 +1,5 @@
 import psutil
+from monitor.monitor_platform import MonitorPlatform
 
 
 class MonitorCPU:
@@ -20,6 +21,7 @@ class MonitorCPU:
         }
         self.cpu_percent_overall = psutil.cpu_percent(interval=1)
         self.cpu_percent_per_cpu = psutil.cpu_percent(interval=None, percpu=True)
+        self.host_name = MonitorPlatform().get_platform_data()["machine_name"]
 
     def get_cpu_data(self):
 
@@ -49,6 +51,7 @@ class MonitorMemory:
             "usage_percent": self.virtual_memory_obj.percent,
             "used": self.virtual_memory_obj.used
         }
+        self.host_name = MonitorPlatform().get_platform_data()["machine_name"]
 
     def get_memory_data(self):
 
@@ -68,6 +71,7 @@ class MonitorDisk:
     def __init__(self):
 
         self.all_disk_partition = psutil.disk_partitions(all=True)
+        self.host_name = MonitorPlatform().get_platform_data()["machine_name"]
     
     def get_all_partition(self):
 

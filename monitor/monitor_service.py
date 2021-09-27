@@ -125,11 +125,11 @@ class MonitorDBMS(MonitorService):
 
             except self.dbms_module.InterfaceError as error_msg:
 
-                return return_status(501, error_msg)
+                return return_status(501, error_msg, 1)
             
             except self.dbms_module.OperationalError as error_msg:
 
-                return return_status(502, error_msg)
+                return return_status(502, error_msg, 2)
 
         return my_inner_action
 
@@ -146,9 +146,9 @@ class MonitorDBMS(MonitorService):
 
             if result:
 
-                return return_status(200, "Success")
+                return return_status(200, "Success", 0)
                 
-            return return_status(404, "Failed")
+            return return_status(404, "Failed", 4)
     
     @get_activity
     def get_connection_count(self):
@@ -163,13 +163,12 @@ class MonitorDBMS(MonitorService):
                 where state = 'active'
                 """
             )
-            
-            header = [x[0] for x in cursor.description]
-            result = cursor.fetchone()
 
-            return {
-                header[i]: r for i, r in enumerate(result) 
-            } if result else None
+            result = cursor.fetchone()[0]
+
+            return return_status(
+                200, status_value=result
+            )
     
     def get_class_name(self):
 

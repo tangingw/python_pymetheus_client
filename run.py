@@ -53,4 +53,11 @@ else:
     print("Send Event Data")
 """
 
-register_device.register()
+print(
+    register_device.generate_sha256_hash()
+)
+print(
+    register_device.get_device_metadata()
+)
+
+#register_device.register()

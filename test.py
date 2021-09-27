@@ -3,7 +3,7 @@ import time
 from monitor.monitor_sys import MonitorMemory
 from monitor.monitor_sys import MonitorCPU
 from event import MonitorEvent
-from monitor.monitor_platform import MonitorPlatform
+#from monitor.monitor_platform import MonitorPlatform
 from monitor.monitor_service import MonitorDBMS
 
 
@@ -34,7 +34,7 @@ while True:
     print(monitor_cpu.get_cpu_percent())
     monitor_event.post_event(
         "cpu", monitor_cpu,
-        MonitorPlatform().get_platform_info()["machine_name"],
+        monitor_cpu.get_cpu_data()["host_name"],
         event_value=monitor_cpu.get_cpu_percent()
     )
 

@@ -8,7 +8,7 @@ class MonitorPlatform:
         self.platform_name = platform.system()
         self.python_version = platform.python_version()
     
-    def get_platform_info(self):
+    def get_platform_data(self):
 
         platform_uname_obj = platform.uname()
         platform_uname_dict = {

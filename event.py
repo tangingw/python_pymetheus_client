@@ -18,16 +18,17 @@ class MonitorEvent:
         """
         monitor_type_name
         
+        can borrow from register_device
         for monitor_type_name reference,
-        "MonitorCPU": "device hostnamme",
-        "MonitorMemory": "device hostname",
-        "MonitorDisk": "hdd name e.g. C:\\ for windows /dev/sda1 for mount point",
-        "MonitorHTTP": "service name",
-        "MonitorDBMS": "service name",
-        "MonitorPort": "port num",
-        "MonitorPlatform": "device hostname",
-        "MonitorNetwork": "ip address",
-        "MonitorService": "service name"
+        "MonitorCPU": "device hostname, host_name",
+        "MonitorMemory": "device hostname, host_name",
+        "MonitorDisk": "hdd name, name e.g. C:\\ for windows /dev/sda1 for mount point",
+        "MonitorHTTP": "service name, service_name",
+        "MonitorDBMS": "service name, service_name",
+        "MonitorPort": "port num, port",
+        "MonitorPlatform": "device hostname, host_name",
+        "MonitorNetwork": "ip address, ip_address",
+        "MonitorService": "service name, service_name"
         """
         return {
             "event_type": event_type, #Can be http response time
@@ -35,7 +36,7 @@ class MonitorEvent:
             "event_message": event_message, #can be a log message
             "event_status": event_status,
             "monitor_type": MonitorType().get_monitor_type(monitor_object), #To which this service go e.g. service
-            "monitor_type_name": monitor_type_name,
+            "monitor_type_name": monitor_type_name, #Name of monitor object that you are monitoring
             "created_at": datetime.utcnow().isoformat()
         }
     
