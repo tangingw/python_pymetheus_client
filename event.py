@@ -7,7 +7,7 @@ class MonitorEvent:
     def __init__(self):
 
         self.client = PyMetheusDeviceClient()
-        self.client.select_endpoint("/collect")
+        self.client.select_endpoint("collect")
 
     def generate_event(
         self, event_type, 
