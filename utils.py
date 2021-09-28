@@ -3,36 +3,40 @@ import time
 import threading
 import requests
 import urllib3
+from queue import Queue
 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-def add_function_daemon(function_list, wait_time=5):
+def add_function_daemon(function_list,):
 
-    my_exit_signal = False
+    my_queue = Queue()
 
-    while not my_exit_signal:
+    my_thread_list = [
+        threading.Thread(
+            target=my_func[0], args=(my_queue, my_func[1])
+        ) 
+        for my_func in function_list
+    ]
+
+    for my_thread in my_thread_list:
+
+        my_thread.daemon = True
+        my_thread.start()
+
+    while True:
 
         try:
 
-            my_thread_list = [
-                threading.Thread(target=my_func, args=tuple()) for my_func in function_list
-            ]
-
-            for my_thread in my_thread_list:
-
-                my_thread.daemon = True
-                my_thread.start()
-
-            time.sleep(wait_time)
+            time.sleep(1)
 
         except KeyboardInterrupt:
 
-            my_exit_signal = True
-            for my_thread in my_thread_list:
+            print("Exiting")
+            my_queue.put("e")
+            exit(1)
 
-                my_thread.join()
 
 def return_status(status_code, status_msg=None, status_value=None):
 

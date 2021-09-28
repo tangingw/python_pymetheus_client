@@ -49,9 +49,9 @@ class MonitorMemory:
             "total": self.virtual_memory_obj.total,
             "available": self.virtual_memory_obj.available,
             "usage_percent": self.virtual_memory_obj.percent,
-            "used": self.virtual_memory_obj.used
+            "used": self.virtual_memory_obj.used,
+            "host_name":  MonitorPlatform().get_platform_data()["machine_name"]
         }
-        self.host_name = MonitorPlatform().get_platform_data()["machine_name"]
 
     def get_memory_data(self):
 
