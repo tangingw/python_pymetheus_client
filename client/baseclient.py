@@ -1,9 +1,6 @@
-import sys
-import re
 import json
 from utils import get_response
 from abc import abstractmethod, ABC
-from monitor.monitor_sys import MonitorCPU
 
 
 class PyMetheusClient(ABC):
