@@ -1,6 +1,7 @@
 from datetime import datetime
-from monitor_type import MonitorType
-from client import PyMetheusDeviceClient
+from monitor.monitor_type import MonitorType
+from client.client import PyMetheusDeviceClient
+
 
 class MonitorEvent:
     

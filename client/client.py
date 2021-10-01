@@ -1,5 +1,5 @@
-from configuration import PyMetheusConfig
-from baseclient import PyMetheusClient
+from client.configuration import PyMetheusConfig
+from client.baseclient import PyMetheusClient
 
 
 class PyMetheusDeviceClient(PyMetheusClient):

@@ -5,10 +5,7 @@ from monitor.monitor_platform import MonitorPlatform
 from monitor.monitor_sys import MonitorMemory
 from monitor.monitor_sys import MonitorDisk
 from monitor.monitor_net import MonitorNetwork
-from monitor.monitor_port import MonitorPort
-from monitor.monitor_service import MonitorDBMS
-from configuration import PyMetheusConfig
-from client import PyMetheusDeviceClient
+from client.client import PyMetheusDeviceClient
 
 
 class RegisterDeviceHandler:

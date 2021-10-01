@@ -1,9 +1,8 @@
-import hashlib
-import json
 from register import RegisterDeviceHandler
 from monitor.monitor_service import MonitorDBMS
 from monitor.monitor_port import MonitorPort
-from event import MonitorEvent
+from run_dbms import MonitorMyDBMS
+from utils import add_function_daemon
 
 
 register_device = RegisterDeviceHandler()
@@ -25,39 +24,14 @@ register_device.add_port(
     ]
 )
 
-"""
-pymetheus_client.select_endpoint(f"/device/{device_id}")
-device_status = pymetheus_client.get_data(device_id)
 
-if not device_status:
-    print(
-        "Device Not Registered"
-    )
+register_device.register()
 
-    pymetheus_client.select_endpoint("/device")
-    pymetheus_client.post_data(
-        data=register_device.get_device()
-    )
-
-else:
-
-    #if monitor type is not in monitor_type table, add into table
-    pymetheus_client.select_endpoint("/collect")
-    pymetheus_client.post_data(
-        data=MonitorEvent.generate_event(
-            "Memory", MonitorMemory, 
-            device_status, event_value=4
-        )
-    )
-
-    print("Send Event Data")
-"""
-
-print(
-    register_device.generate_sha256_hash()
+my_monitoring = MonitorMyDBMS()
+add_function_daemon(
+    [
+        (my_monitoring.get_postgre_connection, 60), 
+        (my_monitoring.get_postgre_status, 60),
+        (my_monitoring.get_memory_info, 60)
+    ]
 )
-print(
-    register_device.get_device_metadata()
-)
-
-#register_device.register()
