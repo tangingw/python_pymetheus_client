@@ -24,7 +24,7 @@ class MonitorNetwork:
                 {
                     "ip_type": ip_layer_dict[intf.family] if intf.family in ip_layer_dict.keys() else "mac-address",
                     "mac_address": intf.address if intf.family not in ip_layer_dict.keys() else None,
-                    "ip_address": intf.address if intf.family in ip_layer_dict.keys() else None,
+                    "ip_address": intf.address.split("%")[0] if intf.family in ip_layer_dict.keys() else None,
                     "netmask": intf.netmask, "broadcast": intf.broadcast
                 } for intf in interfaces
             ] for interface_name, interfaces in self.network_interface_info.items()
