@@ -13,7 +13,7 @@ class MonitorMyDBMS:
                 "server": "192.168.0.179",
                 "database": "postgres",
                 "user": "postgres",
-                "password": "tallgeese3"
+                "password": ""
             }
         )
         self.monitor_event = MonitorEvent()
