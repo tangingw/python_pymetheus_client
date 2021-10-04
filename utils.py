@@ -9,7 +9,7 @@ from queue import Queue
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-def add_function_daemon(function_list,):
+def add_function_daemon(function_list):
 
     my_queue = Queue()
 
